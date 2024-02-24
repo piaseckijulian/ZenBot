@@ -4,7 +4,7 @@
   "description": "ZenBot, a modern and super-simple Discord bot, brings ease to your server. From quick commands to seamless interactions, ZenBot is designed for effortless enjoyment!",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node .",
     "build": "tsc"
   },
   "repository": "github:piaseckijulian/zenbot",
