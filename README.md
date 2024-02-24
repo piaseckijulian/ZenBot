@@ -28,6 +28,16 @@ git clone https://github.com/piaseckijulian/ZenBot.git
 cd ZenBot
 ```
 
+Next, duplicate the .env.example file, rename the duplicate to .env, and then input your environmental variables there.
+
+```bash
+pnpm i
+pnpm build
+pnpm start
+```
+
+That's it! - You're good to go. You can add new features, fix bugs etc.
+
 ## 🌐 Contribution
 
 If you want to contribute to this amazing project simply raise an **Issue** when you found a bug or you are requesting a new feature. However if you want to do it yourself create a **Pull Request**.
