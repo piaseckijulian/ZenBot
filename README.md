@@ -32,8 +32,7 @@ Next, duplicate the .env.example file, rename the duplicate to .env, and then in
 
 ```bash
 pnpm i
-pnpm build
-pnpm start
+pnpm dev
 ```
 
 That's it! - You're good to go. You can add new features, fix bugs etc.
