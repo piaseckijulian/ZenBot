@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime.js';
-import { config } from 'dotenv';
+import 'dotenv/config';
 import { Colors } from './types.js';
-config();
 dayjs.extend(relativeTime);
 
 export const TOKEN = process.env.TOKEN;
