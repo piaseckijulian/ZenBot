@@ -12,7 +12,7 @@ const event = {
       type: ActivityType.Custom
     });
 
-    consola.success(`Logged in as ${client.user?.tag}!`);
+    consola.success(`Logged in as ${client.user?.username}!`);
   }
 };
 

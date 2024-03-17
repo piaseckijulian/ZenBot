@@ -17,4 +17,5 @@ export const author = {
   avatarUrl: process.env.AVATAR_URL
 };
 export const colors: Colors = { primary: '#718dc7', error: '#cc0000' };
+export const fileExtension = __dirname.endsWith('dist') ? '.js' : '.ts';
 export { dayjs };

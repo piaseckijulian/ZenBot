@@ -7,7 +7,7 @@ import {
 } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
-import { CLIENT_ID, TOKEN } from '../config.js';
+import { CLIENT_ID, TOKEN, fileExtension } from '../config.js';
 // import { GUILD_ID } from '../config' // Development Only
 import { Command } from '../types.js';
 
@@ -16,7 +16,7 @@ module.exports = async (client: Client) => {
   const commandsDir = join(__dirname, '../commands');
 
   readdirSync(commandsDir).forEach(file => {
-    if (!file.endsWith('.command.js')) return;
+    if (!file.endsWith(`.command${fileExtension}`)) return;
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const command: Command = require(`${commandsDir}/${file}`).default;

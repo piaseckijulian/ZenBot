@@ -5,9 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsx ./src/index.ts",
+    "dev:watch": "tsx watch ./src/index.ts"
   },
-  "repository": "github:piaseckijulian/zenbot",
+  "repository": "github:piaseckijulian/ZenBot",
   "keywords": [
     "discord",
     "bot",
@@ -31,6 +33,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "consola": "^3.2.3",
     "eslint": "^8.57.0",
+    "tsx": "^4.7.1",
     "typescript": "^5.4.2"
   }
 }

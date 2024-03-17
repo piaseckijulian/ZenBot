@@ -3,12 +3,13 @@ import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 import { Event } from '../types.js';
+import { fileExtension } from '../config.js';
 
 module.exports = (client: Client) => {
   const eventsDir = join(__dirname, '../events');
 
   readdirSync(eventsDir).forEach(file => {
-    if (!file.endsWith('.event.js')) return;
+    if (!file.endsWith(`.event${fileExtension}`)) return;
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const event: Event = require(`${eventsDir}/${file}`).default;
