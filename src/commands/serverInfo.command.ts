@@ -1,4 +1,3 @@
-import consola from 'consola';
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 import { colors, dayjs } from '../config.js';
 import { Command } from '../types.js';
@@ -6,12 +5,20 @@ import { Command } from '../types.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('serverinfo')
-    .setDescription('Display info about the server'),
+    .setDescription('Display info about the server')
+    .setDMPermission(false),
   execute(interaction) {
     const guild = interaction.guild;
+
     if (!guild) {
-      consola.error('Guild not found');
-      throw new Error('Guild not found');
+      const errorEmbed = new EmbedBuilder()
+        .setTitle('You are not in guild!')
+        .setColor(colors.error);
+
+      return interaction.reply({
+        embeds: [errorEmbed],
+        ephemeral: true
+      });
     }
 
     const boostTier = guild.premiumTier ? `${guild.premiumTier} Tier` : 'None';
@@ -56,6 +63,6 @@ export default {
       .setThumbnail(guild.iconURL())
       .addFields(fields);
 
-    interaction.reply({ embeds: [embed] });
+    return interaction.reply({ embeds: [embed] });
   }
 } satisfies Command;

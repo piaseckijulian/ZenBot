@@ -10,7 +10,7 @@ export default {
       .setTitle(`Pong! Latency is ${Date.now() - interaction.createdTimestamp}ms`)
       .setColor(colors.primary);
 
-    interaction.reply({
+    return interaction.reply({
       embeds: [embed],
       ephemeral: true
     });

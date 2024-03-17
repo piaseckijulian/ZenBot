@@ -24,7 +24,16 @@ export default {
   async execute(interaction) {
     const { channel } = interaction;
 
-    if (channel?.type !== ChannelType.GuildText) throw new Error('Not in text channel');
+    if (channel?.type !== ChannelType.GuildText) {
+      const errorEmbed = new EmbedBuilder()
+        .setTitle('You are not in text channel!')
+        .setColor(colors.error);
+
+      return interaction.reply({
+        embeds: [errorEmbed],
+        ephemeral: true
+      });
+    }
 
     const amountMessagesToDelete = interaction.options.getInteger('amount') ?? 5;
 
@@ -41,7 +50,7 @@ export default {
         .setTitle(`Deleted ${messages.size} messages`)
         .setColor(colors.primary);
 
-      await interaction.editReply({ embeds: [editedEmbed] });
+      return await interaction.editReply({ embeds: [editedEmbed] });
     } catch (error) {
       consola.error(error);
     }

@@ -1,5 +1,6 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import { colors } from '../config.js';
+import { checkForErrors } from '../lib/checkForErrors.js';
 import { Command } from '../types.js';
 
 export default {
@@ -7,6 +8,7 @@ export default {
     .setName('ban')
     .setDescription('Bans a user')
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+    .setDMPermission(false)
     .addUserOption(option =>
       option
         .setName('target')
@@ -17,54 +19,20 @@ export default {
       option.setName('reason').setDescription('Reason for the ban')
     ),
   async execute(interaction) {
-    const user = interaction.options.getUser('target');
+    const user = interaction.options.getUser('target')!;
     const reason = interaction.options.getString('reason') || 'No reason provided';
-    const targetUser = await interaction.guild?.members.fetch(user?.id || '');
 
-    const errorEmbed = new EmbedBuilder().setColor(colors.error);
+    const { isValid, targetUser, message } = await checkForErrors(
+      interaction,
+      'ban',
+      user
+    );
 
-    if (!targetUser) {
+    if (!isValid || !targetUser) {
+      const errorEmbed = new EmbedBuilder().setTitle(message).setColor(colors.error);
+
       return interaction.reply({
-        embeds: [errorEmbed.setTitle('This user is not a member of this server!')],
-        ephemeral: true
-      });
-    }
-
-    if (targetUser.id === interaction.guild?.ownerId) {
-      return interaction.reply({
-        embeds: [errorEmbed.setTitle('This user is the owner of this server!')],
-        ephemeral: true
-      });
-    }
-
-    if (targetUser.user.bot) {
-      return interaction.reply({
-        embeds: [errorEmbed.setTitle('You cannot ban bots!')],
-        ephemeral: true
-      });
-    }
-
-    if (targetUser.id === interaction.user.id) {
-      return interaction.reply({
-        embeds: [errorEmbed.setTitle('You cannot ban yourself!')],
-        ephemeral: true
-      });
-    }
-
-    if (!interaction.inCachedGuild()) throw new Error('Not in cached guild');
-
-    // Highest role of the target user
-    const targetUserRolePosition = targetUser.roles.highest.position;
-    // Highest role of the user running the cmd
-    const requestUserRolePosition = interaction.member.roles.highest.position;
-
-    if (targetUserRolePosition >= requestUserRolePosition) {
-      return interaction.reply({
-        embeds: [
-          errorEmbed.setTitle(
-            'You cannot ban that user because they have the same/higher role than you!'
-          )
-        ],
+        embeds: [errorEmbed],
         ephemeral: true
       });
     }
@@ -73,16 +41,8 @@ export default {
     targetUser.ban({ deleteMessageSeconds: oneWeekSecs, reason });
 
     const fields = [
-      {
-        name: 'User',
-        value: `<@!${targetUser.id}>`,
-        inline: true
-      },
-      {
-        name: 'Reason',
-        value: reason,
-        inline: true
-      }
+      { name: 'User', value: `<@!${targetUser.id}>`, inline: true },
+      { name: 'Reason', value: reason, inline: true }
     ];
 
     const embed = new EmbedBuilder()
@@ -91,7 +51,7 @@ export default {
       .setThumbnail(targetUser.displayAvatarURL())
       .setFields(fields);
 
-    interaction.reply({
+    return interaction.reply({
       embeds: [embed],
       ephemeral: true
     });

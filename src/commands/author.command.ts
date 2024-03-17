@@ -37,9 +37,9 @@ export default {
     const embed = new EmbedBuilder()
       .setTitle('Author Information')
       .setColor(colors.primary)
-      .setThumbnail(author.avatarUrl || '')
+      .setThumbnail(author.avatarUrl!)
       .addFields(fields);
 
-    interaction.reply({ embeds: [embed] });
+    return interaction.reply({ embeds: [embed] });
   }
 } satisfies Command;
