@@ -8,7 +8,7 @@ export default {
   data: new SlashCommandBuilder()
     .setName('timeout')
     .setDescription('Timeouts the user for certain amount of time')
-    .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
+    .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
     .setDMPermission(false)
     .addUserOption(option =>
       option

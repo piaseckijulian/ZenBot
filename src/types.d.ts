@@ -1,12 +1,7 @@
-import {
-  ChatInputCommandInteraction,
-  Collection,
-  ColorResolvable,
-  SlashCommandBuilder
-} from 'discord.js';
+import { ChatInputCommandInteraction, Collection, ColorResolvable } from 'discord.js';
 
 export interface Command {
-  data: Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+  data: SlashCommandBuilder;
   execute: (interaction: ChatInputCommandInteraction) => void;
 }
 
