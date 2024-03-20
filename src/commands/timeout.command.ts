@@ -1,7 +1,7 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import ms from 'ms';
 import { colors } from '../config.js';
-import { checkForErrors } from '../lib/checkForErrors.js';
+import { validateCommand } from '../lib/validateCommand.js';
 import { Command } from '../types.js';
 
 export default {
@@ -33,7 +33,7 @@ export default {
     const errorEmbed = new EmbedBuilder().setColor(colors.error);
     await interaction.deferReply({ ephemeral: true });
 
-    const { isValid, targetUser, message } = await checkForErrors(
+    const { isValid, targetUser, message } = await validateCommand(
       interaction,
       'timeout',
       user

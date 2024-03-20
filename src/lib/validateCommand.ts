@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, User } from 'discord.js';
 
 type Action = 'ban' | 'kick' | 'timeout';
 
-export const checkForErrors = async (
+export const validateCommand = async (
   interaction: ChatInputCommandInteraction,
   action: Action,
   user: User

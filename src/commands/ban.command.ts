@@ -1,6 +1,6 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import { colors } from '../config.js';
-import { checkForErrors } from '../lib/checkForErrors.js';
+import { validateCommand } from '../lib/validateCommand.js';
 import { Command } from '../types.js';
 
 export default {
@@ -22,7 +22,7 @@ export default {
     const user = interaction.options.getUser('target')!;
     const reason = interaction.options.getString('reason') || 'No reason provided';
 
-    const { isValid, targetUser, message } = await checkForErrors(
+    const { isValid, targetUser, message } = await validateCommand(
       interaction,
       'ban',
       user
