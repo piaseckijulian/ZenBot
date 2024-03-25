@@ -1,8 +1,11 @@
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
-import { TOKEN, fileExtension } from './config.js';
+import { TOKEN } from './config.js';
+import { getFileExtension } from './lib/utils.js';
 import { Command } from './types.js';
+
+const fileExtension = getFileExtension();
 
 const client: Client = new Client({ intents: [GatewayIntentBits.Guilds] });
 

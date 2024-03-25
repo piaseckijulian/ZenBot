@@ -7,9 +7,12 @@ import {
 } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
-import { CLIENT_ID, TOKEN, fileExtension } from '../config.js';
+import { CLIENT_ID, TOKEN } from '../config.js';
 // import { GUILD_ID } from '../config' // Development Only
+import { getFileExtension } from '../lib/utils.js';
 import { Command } from '../types.js';
+
+const fileExtension = getFileExtension();
 
 module.exports = async (client: Client) => {
   const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];

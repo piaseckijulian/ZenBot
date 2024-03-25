@@ -2,8 +2,10 @@ import consola from 'consola';
 import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import { getFileExtension } from '../lib/utils.js';
 import { Event } from '../types.js';
-import { fileExtension } from '../config.js';
+
+const fileExtension = getFileExtension();
 
 module.exports = (client: Client) => {
   const eventsDir = join(__dirname, '../events');

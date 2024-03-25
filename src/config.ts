@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime.js';
 import 'dotenv/config';
-import { join } from 'path';
 import { Colors } from './types.js';
 dayjs.extend(relativeTime);
 
@@ -18,11 +17,5 @@ export const author = {
   avatarUrl: process.env.AVATAR_URL
 };
 export const colors: Colors = { primary: '#718dc7', error: '#cc0000' };
-
-const rootDir = join(__filename, '../');
-const rootDirForNestedFiles = join(rootDir, '../');
-const condition =
-  rootDir.endsWith('\\dist\\') || rootDirForNestedFiles.endsWith('\\dist\\');
-export const fileExtension = condition ? '.js' : '.ts';
 
 export { dayjs };
