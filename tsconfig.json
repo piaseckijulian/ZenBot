@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "CommonJS",
-    "rootDir": "./src",
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "useUnknownInCatchVariables": false,
-    "skipLibCheck": true
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "target": "ES2022",
+    "moduleResolution": "Node10",
+    "module": "CommonJS",
+    "declaration": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "outDir": "dist"
   },
-  "include": ["./src/**/*"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
