@@ -1,9 +1,9 @@
-name: Format Code
+name: Format
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  format:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
