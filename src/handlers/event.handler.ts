@@ -7,7 +7,7 @@ import { Event } from '../types.js';
 
 const fileExtension = getFileExtension();
 
-module.exports = (client: Client) => {
+export default (client: Client) => {
   const eventsDir = join(__dirname, '../events');
 
   readdirSync(eventsDir).forEach(file => {

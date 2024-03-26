@@ -14,7 +14,7 @@ import { Command } from '../types.js';
 
 const fileExtension = getFileExtension();
 
-module.exports = async (client: Client) => {
+export default async (client: Client) => {
   const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
   const commandsDir = join(__dirname, '../commands');
 
