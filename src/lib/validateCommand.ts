@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, User } from 'discord.js';
+import { type ChatInputCommandInteraction, type User } from 'discord.js';
 
 type Action = 'ban' | 'kick' | 'timeout';
 

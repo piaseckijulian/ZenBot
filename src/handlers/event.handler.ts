@@ -1,25 +1,31 @@
 import consola from 'consola';
-import { Client } from 'discord.js';
-import { readdirSync } from 'fs';
-import { join } from 'path';
-import { getFileExtension } from '../lib/utils.js';
-import { Event } from '../types.js';
+import { type Client } from 'discord.js';
+import { glob } from 'glob';
+import path from 'path';
+import { getEnvironment } from '../lib/utils';
+import { type Event } from '../types';
 
-const fileExtension = getFileExtension();
+const eventHandler = async (client: Client) => {
+  const env = getEnvironment();
+  const handlersPath =
+    env === 'dev' ? './src/events/*.event.ts' : './dist/events/*.event.js';
 
-export default (client: Client) => {
-  const eventsDir = join(__dirname, '../events');
+  const files = (await glob(handlersPath)).map(filePath => path.resolve(filePath));
 
-  readdirSync(eventsDir).forEach(file => {
-    if (!file.endsWith(`.event${fileExtension}`)) return;
-
+  files.map(file => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const event: Event = require(`${eventsDir}/${file}`).default;
+    const event: Event = require(file).default;
 
-    event.once
-      ? client.once(event.name, (...args) => event.execute(...args))
-      : client.on(event.name, (...args) => event.execute(...args));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const execute = (...args: any) => event.execute(...args);
+
+    // @ts-expect-error event.name is compatible with ClientEvents
+    if (event.once) client.once(event.name, execute);
+    // @ts-expect-error event.name is compatible with ClientEvents
+    else client.on(event.name, execute);
   });
 
-  consola.success('Successfully loaded events');
+  consola.success('✅ Successfully loaded events!');
 };
+
+export default eventHandler;

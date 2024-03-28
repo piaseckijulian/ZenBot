@@ -1,7 +1,1 @@
-export const getFileExtension = () => {
-  if (__dirname.includes('dist')) {
-    return '.js';
-  } else {
-    return '.ts';
-  }
-};
+export const getEnvironment = () => (__dirname.includes('dist') ? 'prod' : 'dev');

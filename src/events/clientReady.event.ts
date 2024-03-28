@@ -1,7 +1,8 @@
 import consola from 'consola';
-import { ActivityType, Client, Events } from 'discord.js';
+import { ActivityType, type Client, Events } from 'discord.js';
+import { type Event } from '../types';
 
-const event = {
+const readyEvent: Event = {
   name: Events.ClientReady,
   once: true,
   execute(client: Client) {
@@ -12,8 +13,8 @@ const event = {
       type: ActivityType.Custom
     });
 
-    consola.success(`Logged in as ${client.user?.username}!`);
+    consola.success(`✅ Logged in as ${client.user?.username}!`);
   }
 };
 
-export default event;
+export default readyEvent;

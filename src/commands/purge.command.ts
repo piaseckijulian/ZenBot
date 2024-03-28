@@ -1,14 +1,14 @@
-import { consola } from 'consola';
+import consola from 'consola';
 import {
   ChannelType,
   EmbedBuilder,
   PermissionFlagsBits,
   SlashCommandBuilder
 } from 'discord.js';
-import { colors } from '../config.js';
-import { Command } from '../types.js';
+import { colors } from '../config';
+import { type Command } from '../types';
 
-export default {
+const purgeCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('purge')
     .setDescription('Deletes channel messages')
@@ -41,7 +41,7 @@ export default {
       .setTitle(`Deleting ${amountMessagesToDelete} messages...`)
       .setColor(colors.primary);
 
-    await interaction.reply({ embeds: [embed], ephemeral: true });
+    await interaction.reply({ embeds: [embed] });
 
     const messages = await channel.bulkDelete(amountMessagesToDelete, true);
 
@@ -50,9 +50,11 @@ export default {
         .setTitle(`Deleted ${messages.size} messages`)
         .setColor(colors.primary);
 
-      return await interaction.editReply({ embeds: [editedEmbed] });
+      await interaction.editReply({ embeds: [editedEmbed] });
     } catch (error) {
-      consola.error(error);
+      consola.error(`❌ ${error}`);
     }
   }
-} satisfies Command;
+};
+
+export default purgeCommand;

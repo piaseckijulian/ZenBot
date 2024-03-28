@@ -1,10 +1,10 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import ms from 'ms';
-import { colors } from '../config.js';
-import { validateCommand } from '../lib/validateCommand.js';
-import { Command } from '../types.js';
+import { colors } from '../config';
+import { validateCommand } from '../lib/validateCommand';
+import { type Command } from '../types';
 
-export default {
+const timeoutCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('timeout')
     .setDescription('Timeouts the user for certain amount of time')
@@ -31,7 +31,7 @@ export default {
     const duration = interaction.options.getString('duration')!;
 
     const errorEmbed = new EmbedBuilder().setColor(colors.error);
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply();
 
     const { isValid, targetUser, message } = await validateCommand(
       interaction,
@@ -42,9 +42,7 @@ export default {
     if (!isValid || !targetUser) {
       errorEmbed.setTitle(message);
 
-      return interaction.editReply({
-        embeds: [errorEmbed]
-      });
+      return interaction.editReply({ embeds: [errorEmbed] });
     }
 
     const msDuration = ms(duration);
@@ -89,8 +87,8 @@ export default {
       .setThumbnail(targetUser.displayAvatarURL())
       .setFields(fields);
 
-    return interaction.editReply({
-      embeds: [embed]
-    });
+    interaction.editReply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default timeoutCommand;

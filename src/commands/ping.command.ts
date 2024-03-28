@@ -1,8 +1,8 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { colors } from '../config.js';
-import { Command } from '../types.js';
+import { colors } from '../config';
+import { type Command } from '../types';
 
-export default {
+const pingCommand: Command = {
   // eslint-disable-next-line quotes
   data: new SlashCommandBuilder().setName('ping').setDescription("Checks bot's latency"),
   execute(interaction) {
@@ -10,9 +10,8 @@ export default {
       .setTitle(`Pong! Latency is ${Date.now() - interaction.createdTimestamp}ms`)
       .setColor(colors.primary);
 
-    return interaction.reply({
-      embeds: [embed],
-      ephemeral: true
-    });
+    interaction.reply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default pingCommand;

@@ -1,9 +1,9 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
-import { colors } from '../config.js';
-import { validateCommand } from '../lib/validateCommand.js';
-import { Command } from '../types.js';
+import { colors } from '../config';
+import { validateCommand } from '../lib/validateCommand';
+import { type Command } from '../types';
 
-export default {
+const kickCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('kick')
     .setDescription('Kicks a user')
@@ -31,10 +31,7 @@ export default {
     if (!isValid || !targetUser) {
       const errorEmbed = new EmbedBuilder().setTitle(message).setColor(colors.error);
 
-      return interaction.reply({
-        embeds: [errorEmbed],
-        ephemeral: true
-      });
+      return interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
 
     targetUser.kick(reason);
@@ -50,9 +47,8 @@ export default {
       .setThumbnail(targetUser.displayAvatarURL())
       .setFields(fields);
 
-    return interaction.reply({
-      embeds: [embed],
-      ephemeral: true
-    });
+    interaction.reply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default kickCommand;

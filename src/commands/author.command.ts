@@ -1,37 +1,19 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { author, colors } from '../config.js';
-import { Command } from '../types.js';
+import { author, colors } from '../config';
+import { type Command } from '../types';
 
-export default {
+const authorCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('author')
     // eslint-disable-next-line quotes
     .setDescription("Displays information about the bot's author"),
   execute(interaction) {
     const fields = [
-      {
-        name: 'Name',
-        value: author.name
-      },
-      {
-        name: 'Username',
-        value: `<@!${author.discordUserId}>`
-      },
-      {
-        name: 'Website',
-        value: `[Link](${author.websiteUrl})`,
-        inline: true
-      },
-      {
-        name: 'Github',
-        value: `[Link](${author.githubUrl})`,
-        inline: true
-      },
-      {
-        name: 'Twitter',
-        value: `[Link](${author.twitterUrl})`,
-        inline: true
-      }
+      { name: 'Name', value: author.name },
+      { name: 'Username', value: `<@!${author.discordUserId}>` },
+      { name: 'Website', value: `[Link](${author.websiteUrl})`, inline: true },
+      { name: 'Github', value: `[Link](${author.githubUrl})`, inline: true },
+      { name: 'Twitter', value: `[Link](${author.twitterUrl})`, inline: true }
     ];
 
     const embed = new EmbedBuilder()
@@ -40,6 +22,8 @@ export default {
       .setThumbnail(author.avatarUrl!)
       .addFields(fields);
 
-    return interaction.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default authorCommand;

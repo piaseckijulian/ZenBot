@@ -1,10 +1,11 @@
 import consola from 'consola';
-import { Collection, Events, Interaction } from 'discord.js';
+import { Collection, Events, type Interaction } from 'discord.js';
 import { COOLDOWN } from '../config.js';
-import { Event } from '../types.js';
+import { type Event } from '../types.js';
 
-const event: Event = {
+const interactionCreateEvent: Event = {
   name: Events.InteractionCreate,
+  once: false,
   async execute(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
 
@@ -13,8 +14,8 @@ const event: Event = {
     const { cooldowns } = interaction.client;
 
     if (!command) {
-      consola.error(`No command matching ${interaction.commandName} was found.`);
-      throw new Error(`No command matching ${interaction.commandName} was found.`);
+      consola.error(`❌ No command matching ${interaction.commandName} was found.`);
+      return;
     }
 
     if (!cooldowns.has(command.data.name)) {
@@ -22,11 +23,11 @@ const event: Event = {
     }
 
     const now = Date.now();
-    const timestamps = cooldowns.get(command.data.name);
+    const timestamps = cooldowns.get(command.data.name)!;
     const cooldownAmount = COOLDOWN * 1000;
 
     if (timestamps.has(interaction.user.id)) {
-      const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+      const expirationTime = timestamps.get(interaction.user.id)! + cooldownAmount;
 
       if (now < expirationTime) {
         const expirationTimestamp = Math.round(expirationTime / 1000);
@@ -49,15 +50,13 @@ const event: Event = {
         ephemeral: true
       };
 
-      if (interaction.replied || interaction.deferred) {
+      if (interaction.replied || interaction.deferred)
         await interaction.followUp(replyMsg);
-      } else {
-        await interaction.reply(replyMsg);
-      }
+      else await interaction.reply(replyMsg);
 
-      consola.error(error);
+      consola.error(`❌ ${error}`);
     }
   }
 };
 
-export default event;
+export default interactionCreateEvent;

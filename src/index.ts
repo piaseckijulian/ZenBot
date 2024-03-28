@@ -1,25 +1,22 @@
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
-import { readdirSync } from 'fs';
-import { join } from 'path';
-import { TOKEN } from './config.js';
-import { getFileExtension } from './lib/utils.js';
-import { Command } from './types.js';
+import { glob } from 'glob';
+import path from 'path';
+import { TOKEN } from './env';
+import { getEnvironment } from './lib/utils';
 
-const fileExtension = getFileExtension();
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+client.commands = new Collection();
+client.cooldowns = new Collection();
 
-const client: Client = new Client({ intents: [GatewayIntentBits.Guilds] });
+(async () => {
+  const env = getEnvironment();
+  const handlersPath =
+    env === 'dev' ? './src/handlers/*.handler.ts' : './dist/handlers/*.handler.js';
 
-client.commands = new Collection<string, Command>();
-client.cooldowns = new Collection<string, number>();
-
-const handlersDir = join(__dirname, './handlers');
-readdirSync(handlersDir).forEach(handler => {
-  if (!handler.endsWith(`.handler${fileExtension}`)) return;
+  const files = (await glob(handlersPath)).map(filePath => path.resolve(filePath));
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const handlerFunction = require(`${handlersDir}/${handler}`);
-
-  handlerFunction(client);
-});
+  files.map(file => require(file).default(client));
+})();
 
 client.login(TOKEN);

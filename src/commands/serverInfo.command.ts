@@ -1,8 +1,8 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { colors, dayjs } from '../config.js';
-import { Command } from '../types.js';
+import { colors, dayjs } from '../config';
+import { type Command } from '../types';
 
-export default {
+const serverInfoCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('serverinfo')
     .setDescription('Display info about the server')
@@ -24,30 +24,12 @@ export default {
     const boostTier = guild.premiumTier ? `${guild.premiumTier} Tier` : 'None';
 
     const fields = [
-      {
-        name: 'Server name',
-        value: `${guild.name}`
-      },
-      {
-        name: 'Server ID',
-        value: `${guild.id}`
-      },
-      {
-        name: 'Member count',
-        value: `${guild.memberCount} members`
-      },
-      {
-        name: 'Owner',
-        value: `<@!${guild.ownerId}>`
-      },
-      {
-        name: 'Boost tier',
-        value: boostTier
-      },
-      {
-        name: 'Boost count',
-        value: `${guild.premiumSubscriptionCount || '0'} boosts`
-      },
+      { name: 'Server name', value: `${guild.name}` },
+      { name: 'Server ID', value: `${guild.id}` },
+      { name: 'Member count', value: `${guild.memberCount} members` },
+      { name: 'Owner', value: `<@!${guild.ownerId}>` },
+      { name: 'Boost tier', value: boostTier },
+      { name: 'Boost count', value: `${guild.premiumSubscriptionCount || '0'} boosts` },
       {
         name: 'Created on',
         value: `${dayjs(guild.createdTimestamp).format('D MMMM YYYY')} (${dayjs(
@@ -63,6 +45,8 @@ export default {
       .setThumbnail(guild.iconURL())
       .addFields(fields);
 
-    return interaction.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default serverInfoCommand;

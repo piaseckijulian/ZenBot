@@ -1,8 +1,8 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { colors, dayjs } from '../config.js';
-import { Command } from '../types.js';
+import { colors, dayjs } from '../config';
+import { type Command } from '../types';
 
-export default {
+const userInfoCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('userinfo')
     .setDescription('Displays info about the user')
@@ -48,6 +48,8 @@ export default {
       .setThumbnail(targetUser.displayAvatarURL())
       .addFields(fields);
 
-    return interaction.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default userInfoCommand;

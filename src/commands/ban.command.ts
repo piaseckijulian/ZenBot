@@ -1,9 +1,9 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
-import { colors } from '../config.js';
-import { validateCommand } from '../lib/validateCommand.js';
-import { Command } from '../types.js';
+import { colors } from '../config';
+import { validateCommand } from '../lib/validateCommand';
+import { type Command } from '../types';
 
-export default {
+const banCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('ban')
     .setDescription('Bans a user')
@@ -31,10 +31,7 @@ export default {
     if (!isValid || !targetUser) {
       const errorEmbed = new EmbedBuilder().setTitle(message).setColor(colors.error);
 
-      return interaction.reply({
-        embeds: [errorEmbed],
-        ephemeral: true
-      });
+      return interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     }
 
     const oneWeekSecs = 604800;
@@ -51,9 +48,8 @@ export default {
       .setThumbnail(targetUser.displayAvatarURL())
       .setFields(fields);
 
-    return interaction.reply({
-      embeds: [embed],
-      ephemeral: true
-    });
+    interaction.reply({ embeds: [embed] });
   }
-} satisfies Command;
+};
+
+export default banCommand;
