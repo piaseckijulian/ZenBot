@@ -1,0 +1,105 @@
+import {
+  EmbedBuilder,
+  PermissionFlagsBits,
+  SlashCommandBuilder
+} from 'discord.js';
+import ms from 'ms';
+import { colors } from '../config';
+import { validateCommand } from '../lib/validateCommand';
+import { type Command } from '../types';
+
+const timeoutCommand: Command = {
+  data: new SlashCommandBuilder()
+    .setName('timeout')
+    .setDescription('Timeouts the user for certain amount of time')
+    .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
+    .setDMPermission(false)
+    .addUserOption(option =>
+      option
+        .setName('target')
+        .setDescription('User that we want to timeout')
+        .setRequired(true)
+    )
+    .addStringOption(option =>
+      option
+        .setName('duration')
+        .setDescription('Length of the timeout (1d. 2h, 5m etc.)')
+        .setRequired(true)
+    )
+    .addStringOption(option =>
+      option.setName('reason').setDescription('Reason for the timeout')
+    ),
+  async execute(interaction) {
+    const user = interaction.options.getUser('target')!;
+    const reason =
+      interaction.options.getString('reason') || 'No reason provided';
+    const duration = interaction.options.getString('duration')!;
+
+    const errorEmbed = new EmbedBuilder().setColor(colors.error);
+    await interaction.deferReply();
+
+    const { isValid, targetUser, message } = await validateCommand(
+      interaction,
+      'timeout',
+      user
+    );
+
+    if (!isValid || !targetUser) {
+      errorEmbed.setTitle(message);
+
+      return interaction.editReply({ embeds: [errorEmbed] });
+    }
+
+    const msDuration = ms(duration);
+
+    if (isNaN(msDuration)) {
+      return interaction.editReply({
+        embeds: [errorEmbed.setTitle('Invalid duration provided')]
+      });
+    }
+
+    const seconds28Days = 2.419e6;
+
+    if (msDuration < 5000 || msDuration > seconds28Days) {
+      return interaction.editReply({
+        embeds: [
+          errorEmbed.setTitle('Duration must be between 5 seconds and 28 days')
+        ]
+      });
+    }
+
+    const { default: prettyMs } = await import('pretty-ms');
+
+    if (targetUser.isCommunicationDisabled()) {
+      await targetUser.timeout(msDuration, reason);
+      interaction.editReply(
+        `Updated time out for <@!${targetUser.id}> reason: ${reason} (${prettyMs(
+          msDuration,
+          { verbose: true }
+        )})`
+      );
+    }
+
+    await targetUser.timeout(msDuration, reason);
+
+    const fields = [
+      { name: 'User', value: `<@!${targetUser.id}>`, inline: true },
+      { name: 'Reason', value: reason, inline: true },
+      {
+        name: 'Duration',
+        value: prettyMs(msDuration, { verbose: true }),
+        inline: true
+      }
+    ];
+
+    const embed = new EmbedBuilder()
+      .setTitle(`${targetUser.user.username} has been timed out`)
+      .setColor(colors.primary)
+      .setThumbnail(targetUser.displayAvatarURL())
+      .setFields(fields);
+
+    interaction.editReply({ embeds: [embed] });
+  }
+};
+
+export default timeoutCommand;

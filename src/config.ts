@@ -1,0 +1,20 @@
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime.js';
+import { type Colors } from './types';
+
+dayjs.extend(relativeTime);
+
+export const COOLDOWN = 5; // in seconds
+
+export const author = {
+  name: 'Julian Piasecki',
+  discordUserId: '572116744576172032',
+  githubUrl: 'https://github.com/piaseckijulian',
+  twitterUrl: 'https://twitter.com/piaseckijulian',
+  websiteUrl: 'https://julian-portfolio.vercel.app',
+  avatarUrl: process.env.AVATAR_URL
+};
+
+export const colors: Colors = { primary: '#718dc7', error: '#cc0000' };
+
+export { dayjs };
