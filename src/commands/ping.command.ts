@@ -5,7 +5,6 @@ import { type Command } from '../types';
 const pingCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('ping')
-    // eslint-disable-next-line quotes
     .setDescription("Checks bot's latency"),
   execute(interaction) {
     const embed = new EmbedBuilder()

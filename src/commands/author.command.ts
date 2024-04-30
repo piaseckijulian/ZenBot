@@ -5,7 +5,6 @@ import { type Command } from '../types';
 const authorCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('author')
-    // eslint-disable-next-line quotes
     .setDescription("Displays information about the bot's author"),
   execute(interaction) {
     const fields = [
