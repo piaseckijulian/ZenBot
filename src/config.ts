@@ -10,7 +10,7 @@ export const author = {
   name: 'Julian Piasecki',
   discordUserId: '572116744576172032',
   githubUrl: 'https://github.com/piaseckijulian',
-  twitterUrl: 'https://twitter.com/piaseckijulian',
+  xUrl: 'https://x.com/piaseckijulian',
   websiteUrl: 'https://julian-portfolio.vercel.app',
   avatarUrl: process.env.AVATAR_URL
 };
