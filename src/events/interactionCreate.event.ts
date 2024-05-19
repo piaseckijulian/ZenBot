@@ -1,7 +1,7 @@
 import consola from 'consola';
 import { Collection, Events, type Interaction } from 'discord.js';
-import { COOLDOWN } from '../config.js';
-import { type Event } from '../types.js';
+import { COOLDOWN } from '../config';
+import { type Event } from '../types';
 
 const interactionCreateEvent: Event = {
   name: Events.InteractionCreate,

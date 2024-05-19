@@ -42,7 +42,7 @@ const purgeCommand: Command = {
       .setTitle(`Deleting ${amountMessagesToDelete} messages...`)
       .setColor(colors.primary);
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed], ephemeral: true });
 
     const messages = await channel.bulkDelete(amountMessagesToDelete, true);
 

@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
     "esModuleInterop": true,
-    "strictNullChecks": true,
-    "target": "ES2022",
-    "moduleResolution": "Node10",
-    "module": "CommonJS",
-    "declaration": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
     "isolatedModules": true,
-    "noEmit": true,
-    "outDir": "dist"
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "module": "CommonJS",
+    "outDir": "dist",
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2022"]
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

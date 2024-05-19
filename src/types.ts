@@ -2,12 +2,12 @@ import {
   type ChatInputCommandInteraction,
   type Collection,
   type ColorResolvable,
-  type SlashCommandBuilder,
+  type SlashCommandOptionsOnlyBuilder,
   Events
 } from 'discord.js';
 
 export interface Command {
-  data: Omit<SlashCommandBuilder, 'addSubcommandGroup' | 'addSubcommand'>;
+  data: SlashCommandOptionsOnlyBuilder;
   execute: (interaction: ChatInputCommandInteraction) => void;
 }
 
@@ -19,7 +19,8 @@ export interface Event {
 }
 
 export interface Colors {
-  [key: string]: ColorResolvable;
+  primary: ColorResolvable;
+  error: ColorResolvable;
 }
 
 declare module 'discord.js' {
