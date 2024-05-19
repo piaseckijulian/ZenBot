@@ -2,7 +2,7 @@
   "name": "zenbot",
   "version": "1.0.0",
   "private": true,
-  "description": "ZenBot, a modern and super-simple Discord bot, brings ease to your server. From quick commands to seamless interactions, ZenBot is designed for effortless enjoyment!",
+  "description": "ZenBot is a modern and super-simple Discord bot that brings ease to your server. From quick commands to seamless interactions. ZenBot is designed for effortless enjoyment!",
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
