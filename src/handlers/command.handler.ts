@@ -9,6 +9,7 @@ import { glob } from 'glob';
 import path from 'path';
 import { pathToFileURL } from 'url';
 import { CLIENT_ID, TOKEN } from '../env.js';
+// import { GUILD_ID } from '../env.js'; // Development only
 import { fileDirName } from '../lib/utils.js';
 import { type Command } from '../types.js';
 
