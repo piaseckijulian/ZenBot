@@ -4,9 +4,9 @@ import {
   SlashCommandBuilder
 } from 'discord.js';
 import ms from 'ms';
-import { colors } from '../config';
-import { validateCommand } from '../lib/validateCommand';
-import { type Command } from '../types';
+import { colors } from '../config.js';
+import { validateCommand } from '../lib/validateCommand.js';
+import { type Command } from '../types.js';
 
 const timeoutCommand: Command = {
   data: new SlashCommandBuilder()

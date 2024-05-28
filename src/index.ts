@@ -1,26 +1,31 @@
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import { glob } from 'glob';
 import path from 'path';
-import { TOKEN } from './env';
-import { getEnvironment } from './lib/utils';
+import { pathToFileURL } from 'url';
+import { TOKEN } from './env.js';
+import { fileDirName } from './lib/utils.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 client.cooldowns = new Collection();
 
-(async () => {
-  const env = getEnvironment();
-  const handlersPath =
-    env === 'dev'
-      ? './src/handlers/*.handler.ts'
-      : './dist/handlers/*.handler.js';
+const { __dirname } = fileDirName(import.meta.url);
 
-  const files = (await glob(handlersPath)).map(filePath =>
-    path.resolve(filePath)
-  );
+const handlersPath = __dirname.includes('dist')
+  ? './dist/handlers/*.handler.js'
+  : './src/handlers/*.handler.ts';
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  files.map(file => require(file).default(client));
-})();
+const files = (await glob(handlersPath)).map(filePath =>
+  path.resolve(filePath)
+);
+
+files.map(async file => {
+  const handlerPath = pathToFileURL(file).href;
+
+  const { default: handler }: { default: (client: Client) => Promise<void> } =
+    await import(handlerPath);
+
+  handler(client);
+});
 
 client.login(TOKEN);

@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { author, colors } from '../config';
-import { type Command } from '../types';
+import { author, colors } from '../config.js';
+import { type Command } from '../types.js';
 
 const authorCommand: Command = {
   data: new SlashCommandBuilder()

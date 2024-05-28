@@ -1,7 +1,7 @@
 import consola from 'consola';
 import { Collection, Events, type Interaction } from 'discord.js';
-import { COOLDOWN } from '../config';
-import { type Event } from '../types';
+import { COOLDOWN } from '../config.js';
+import { type Event } from '../types.js';
 
 const interactionCreateEvent: Event = {
   name: Events.InteractionCreate,
@@ -46,16 +46,18 @@ const interactionCreateEvent: Event = {
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
     try {
-      await command.execute(interaction);
+      command.execute(interaction);
     } catch (error) {
       const replyMsg = {
         content: 'There was an error while executing this command!',
         ephemeral: true
       };
 
-      if (interaction.replied || interaction.deferred)
+      if (interaction.replied || interaction.deferred) {
         await interaction.followUp(replyMsg);
-      else await interaction.reply(replyMsg);
+      } else {
+        await interaction.reply(replyMsg);
+      }
 
       consola.error(`❌ ${error}`);
     }

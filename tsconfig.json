@@ -10,7 +10,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
-    "module": "CommonJS",
+    "module": "NodeNext",
     "outDir": "dist",
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,

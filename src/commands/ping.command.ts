@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { colors } from '../config';
-import { type Command } from '../types';
+import { colors } from '../config.js';
+import { type Command } from '../types.js';
 
 const pingCommand: Command = {
   data: new SlashCommandBuilder()

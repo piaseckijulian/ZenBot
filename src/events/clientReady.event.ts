@@ -1,6 +1,6 @@
 import consola from 'consola';
 import { ActivityType, type Client, Events } from 'discord.js';
-import { type Event } from '../types';
+import { type Event } from '../types.js';
 
 const readyEvent: Event = {
   name: Events.ClientReady,

@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { colors, dayjs } from '../config';
-import { type Command } from '../types';
+import { colors, dayjs } from '../config.js';
+import { type Command } from '../types.js';
 
 const userInfoCommand: Command = {
   data: new SlashCommandBuilder()
