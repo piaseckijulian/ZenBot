@@ -10,19 +10,12 @@
     "build": "tsup",
     "dev": "tsx ./src/index.ts",
     "dev:watch": "tsx watch ./src/index.ts",
-    "format": "prettier . -w",
-    "format:check": "prettier . -c",
-    "lint": "eslint .",
+    "lint": "prettier . --check && eslint .",
+    "format": "prettier . --write",
     "prepare": "husky"
   },
   "repository": "github:piaseckijulian/ZenBot",
-  "keywords": [
-    "discord",
-    "bot",
-    "discord bot",
-    "zenbot",
-    "piaseckijulian"
-  ],
+  "keywords": ["discord", "bot", "discord bot", "zenbot", "piaseckijulian"],
   "author": "Julian Piasecki",
   "license": "MIT",
   "dependencies": {
