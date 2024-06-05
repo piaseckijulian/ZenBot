@@ -15,7 +15,13 @@
     "prepare": "husky"
   },
   "repository": "github:piaseckijulian/ZenBot",
-  "keywords": ["discord", "bot", "discord bot", "zenbot", "piaseckijulian"],
+  "keywords": [
+    "discord",
+    "bot",
+    "discord bot",
+    "zenbot",
+    "piaseckijulian"
+  ],
   "author": "Julian Piasecki",
   "license": "MIT",
   "dependencies": {
