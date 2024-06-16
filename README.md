@@ -15,11 +15,12 @@ ZenBot is a modern and super-simple Discord bot that brings ease to your server.
 
 - Discord.js
 - Typescript
-- dotenv
+- Day.js
+- Ms
+- Pretty Ms
+- Glob
 - Consola
-- Dayjs
-- ms
-- Pretty ms
+- Dotenv
 
 ## ✨ Usage
 
