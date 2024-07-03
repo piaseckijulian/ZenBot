@@ -1,55 +1,59 @@
-import { type ChatInputCommandInteraction, type User } from 'discord.js';
+import type { ChatInputCommandInteraction, User } from "discord.js"
 
-type Action = 'ban' | 'kick' | 'timeout';
-
-export const validateCommand = async (
-  interaction: ChatInputCommandInteraction,
-  action: Action,
+type CheckForErrorsParams = {
+  action: "ban" | "kick" | "timeout"
+  interaction: ChatInputCommandInteraction
   user: User
-) => {
-  if (!interaction.guild || !interaction.inCachedGuild()) {
-    return { isValid: false, message: 'You are not in guild!' };
-  }
+}
 
-  const targetUser = await interaction.guild.members.fetch(user.id)!;
+const validateCommand = async (params: CheckForErrorsParams) => {
+  const { action, interaction, user } = params
+  const targetUser = await interaction.guild?.members.fetch(user.id)
 
   if (!targetUser) {
     return {
-      isValid: false,
-      message: 'This user is not a member of this server!'
-    };
+      error: "This user is not a member of this server!"
+    }
+  }
+
+  if (!interaction.guild || !interaction.inCachedGuild()) {
+    return {
+      error: "You are not in guild!"
+    }
   }
 
   if (targetUser.id === interaction.guild.ownerId) {
     return {
-      isValid: false,
-      message: 'This user is the owner of this server!'
-    };
+      error: "This user is the owner of this server!"
+    }
   }
 
   if (targetUser.user.bot) {
-    return { isValid: false, message: `You cannot ${action} bots!` };
+    return {
+      error: `You cannot ${action} bots!`
+    }
   }
 
   if (targetUser.id === interaction.user.id) {
-    return { isValid: false, message: `You cannot ${action} yourself!` };
+    return {
+      error: `You cannot ${action} yourself!`
+    }
   }
 
   // Highest role of the target user
-  const targetUserRolePosition = targetUser.roles.highest.position;
-  // Highest role of the user running the cmd
-  const requestUserRolePosition = interaction.member.roles.highest.position;
+  const targetUserRolePosition = targetUser.roles.highest.position
+  // Highest role of the user running the command
+  const requestUserRolePosition = interaction.member.roles.highest.position
 
   if (targetUserRolePosition >= requestUserRolePosition) {
     return {
-      isValid: false,
-      message: `You cannot ${action} that user because they have the same/higher role than you!`
-    };
+      error: `You cannot ${action} that user because they have the same/higher role than you!`
+    }
   }
 
   return {
-    isValid: true,
-    message: '',
     targetUser
-  };
-};
+  }
+}
+
+export default validateCommand

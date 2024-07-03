@@ -4,7 +4,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/piaseckijulian/ZenBot?style=for-the-badge)
 ![GitHub License](https://img.shields.io/github/license/piaseckijulian/ZenBot?style=for-the-badge)
 
-ZenBot is a modern and super-simple Discord bot that brings ease to your server. From quick commands to seamless interactions. ZenBot is designed for effortless enjoyment! 🚀
+ZenBot is a helpful and friendly Discord Bot that makes managing your server easy and fun. 🚀
 
 ## 🔗 Links
 
@@ -19,6 +19,8 @@ ZenBot is a modern and super-simple Discord bot that brings ease to your server.
 - Ms
 - Pretty Ms
 - Glob
+- T3 Env
+- Zod
 - Consola
 
 ## ✨ Usage

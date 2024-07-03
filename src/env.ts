@@ -1,16 +1,16 @@
-import consola from 'consola';
-import 'dotenv/config';
+import "dotenv/config"
+import { createEnv } from "@t3-oss/env-core"
+import { z } from "zod"
 
-const TOKEN = process.env.TOKEN;
-const CLIENT_ID = process.env.CLIENT_ID;
-// const GUILD_ID = process.env.GUILD_ID;
+const env = createEnv({
+  server: {
+    TOKEN: z.string().min(1),
+    CLIENT_ID: z.string().min(1),
+    AVATAR_URL: z.string().url().min(1)
+    // GUILD_ID: z.string().min(1) // Development only
+  },
+  runtimeEnv: process.env,
+  emptyStringAsUndefined: true
+})
 
-if (!TOKEN) consola.error('❌ TOKEN was not found!');
-if (!CLIENT_ID) consola.error('❌ CLIENT_ID was not found!');
-// if (!GUILD_ID) consola.error('❌ GUILD_ID was not found');
-
-export {
-  // GUILD_ID,
-  CLIENT_ID,
-  TOKEN
-};
+export default env
