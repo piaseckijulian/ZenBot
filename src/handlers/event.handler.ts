@@ -13,9 +13,11 @@ const eventHandler = async (client: Client) => {
     ? "./dist/events/*.event.js"
     : "./src/events/*.event.ts"
 
-  const files = (await glob(eventsPath)).map(filePath => path.resolve(filePath))
+  const files = (await glob(eventsPath)).map((filePath) =>
+    path.resolve(filePath),
+  )
 
-  files.map(async file => {
+  files.map(async (file) => {
     const eventPath = pathToFileURL(file).href
     const { default: event }: { default: Event } = await import(eventPath)
 

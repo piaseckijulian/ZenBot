@@ -3,7 +3,7 @@ import type {
   Collection,
   ColorResolvable,
   Events,
-  SlashCommandOptionsOnlyBuilder
+  SlashCommandOptionsOnlyBuilder,
 } from "discord.js"
 
 export interface Command {

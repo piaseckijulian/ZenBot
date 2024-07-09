@@ -15,9 +15,11 @@ const handlersPath = __dirname.includes("dist")
   ? "./dist/handlers/*.handler.js"
   : "./src/handlers/*.handler.ts"
 
-const files = (await glob(handlersPath)).map(filePath => path.resolve(filePath))
+const files = (await glob(handlersPath)).map((filePath) =>
+  path.resolve(filePath),
+)
 
-files.map(async file => {
+files.map(async (file) => {
   const handlerPath = pathToFileURL(file).href
 
   const { default: handler }: { default: (client: Client) => Promise<void> } =

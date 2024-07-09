@@ -12,7 +12,7 @@ const authorCommand = {
       { name: "Username", value: `<@!${author.discordUserId}>` },
       { name: "Website", value: `[Link](${author.websiteUrl})`, inline: true },
       { name: "Github", value: `[Link](${author.githubUrl})`, inline: true },
-      { name: "X", value: `[Link](${author.xUrl})`, inline: true }
+      { name: "X", value: `[Link](${author.xUrl})`, inline: true },
     ]
 
     const embed = new EmbedBuilder()
@@ -22,7 +22,7 @@ const authorCommand = {
       .addFields(fields)
 
     interaction.reply({ embeds: [embed] })
-  }
+  },
 } satisfies Command
 
 export default authorCommand

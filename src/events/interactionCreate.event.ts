@@ -14,7 +14,7 @@ const interactionCreateEvent = {
 
     if (!command) {
       consola.error(
-        `❌ No command matching ${interaction.commandName} was found.`
+        `❌ No command matching ${interaction.commandName} was found.`,
       )
 
       return
@@ -42,7 +42,7 @@ const interactionCreateEvent = {
 
         return interaction.reply({
           content: `Please wait <t:${expirationTimestamp}:R> before reusing the \`${command.data.name}\` command.`,
-          ephemeral: true
+          ephemeral: true,
         })
       }
     }
@@ -55,7 +55,7 @@ const interactionCreateEvent = {
     } catch (error) {
       const replyMsg = {
         content: "There was an error while executing this command!",
-        ephemeral: true
+        ephemeral: true,
       }
 
       if (interaction.replied || interaction.deferred) {
@@ -66,7 +66,7 @@ const interactionCreateEvent = {
 
       consola.error(`❌ ${error}`)
     }
-  }
+  },
 } satisfies Event
 
 export default interactionCreateEvent

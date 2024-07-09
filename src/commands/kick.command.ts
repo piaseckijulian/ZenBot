@@ -1,7 +1,7 @@
 import {
   EmbedBuilder,
   PermissionFlagsBits,
-  SlashCommandBuilder
+  SlashCommandBuilder,
 } from "discord.js"
 import { colors } from "../config.js"
 import validateCommand from "../lib/validateCommand.js"
@@ -13,14 +13,14 @@ const kickCommand = {
     .setDescription("Kicks a user")
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
     .setDMPermission(false)
-    .addUserOption(option =>
+    .addUserOption((option) =>
       option
         .setName("target")
         .setDescription("User that we want to kick")
-        .setRequired(true)
+        .setRequired(true),
     )
-    .addStringOption(option =>
-      option.setName("reason").setDescription("Reason for the kick")
+    .addStringOption((option) =>
+      option.setName("reason").setDescription("Reason for the kick"),
     ),
   async execute(interaction) {
     const user = interaction.options.getUser("target")
@@ -32,7 +32,7 @@ const kickCommand = {
     const { error, targetUser } = await validateCommand({
       action: "kick",
       interaction,
-      user
+      user,
     })
 
     if (error || !targetUser) {
@@ -47,7 +47,7 @@ const kickCommand = {
 
     const fields = [
       { name: "User", value: `<@!${targetUser.id}>`, inline: true },
-      { name: "Reason", value: reason, inline: true }
+      { name: "Reason", value: reason, inline: true },
     ]
 
     const embed = new EmbedBuilder()
@@ -57,7 +57,7 @@ const kickCommand = {
       .setFields(fields)
 
     interaction.reply({ embeds: [embed] })
-  }
+  },
 } satisfies Command
 
 export default kickCommand

@@ -10,11 +10,11 @@ const readyEvent = {
 
     client.user?.setActivity({
       name: `👀 | Watching ${serverCount} Discord Servers!`,
-      type: ActivityType.Custom
+      type: ActivityType.Custom,
     })
 
     consola.success(`✅ Logged in as ${client.user?.username}!`)
-  }
+  },
 } satisfies Event
 
 export default readyEvent

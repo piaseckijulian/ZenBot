@@ -9,12 +9,12 @@ const pingCommand = {
   execute(interaction) {
     const embed = new EmbedBuilder()
       .setTitle(
-        `Pong! Latency is ${Date.now() - interaction.createdTimestamp}ms`
+        `Pong! Latency is ${Date.now() - interaction.createdTimestamp}ms`,
       )
       .setColor(colors.primary)
 
     interaction.reply({ embeds: [embed] })
-  }
+  },
 } satisfies Command
 
 export default pingCommand

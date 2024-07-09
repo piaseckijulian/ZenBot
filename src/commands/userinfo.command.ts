@@ -7,8 +7,8 @@ const userInfoCommand = {
     .setName("userinfo")
     .setDescription("Displays info about the user")
     .setDMPermission(false)
-    .addUserOption(option =>
-      option.setName("target").setDescription("User that we want info about")
+    .addUserOption((option) =>
+      option.setName("target").setDescription("User that we want info about"),
     ),
   async execute(interaction) {
     const user = interaction.options.getUser("target") || interaction.user
@@ -37,9 +37,9 @@ const userInfoCommand = {
       {
         name: "Member since",
         value: `${dayjs(targetUser.joinedTimestamp).format("D MMMM YYYY")} (${dayjs(
-          targetUser.joinedTimestamp
-        ).fromNow()})`
-      }
+          targetUser.joinedTimestamp,
+        ).fromNow()})`,
+      },
     ]
 
     const embed = new EmbedBuilder()
@@ -49,7 +49,7 @@ const userInfoCommand = {
       .addFields(fields)
 
     interaction.reply({ embeds: [embed] })
-  }
+  },
 } satisfies Command
 
 export default userInfoCommand

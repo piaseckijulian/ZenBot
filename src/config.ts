@@ -13,12 +13,12 @@ export const author = {
   githubUrl: "https://github.com/piaseckijulian",
   xUrl: "https://x.com/piaseckijulian",
   websiteUrl: "https://julian-portfolio.vercel.app",
-  avatarUrl: env.AVATAR_URL
+  avatarUrl: env.AVATAR_URL,
 }
 
 export const colors = {
   primary: "#a600ff",
-  error: "#cc0000"
+  error: "#cc0000",
 } satisfies Colors
 
 export { dayjs }

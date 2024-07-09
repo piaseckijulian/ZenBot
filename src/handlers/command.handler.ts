@@ -5,7 +5,7 @@ import {
   type Client,
   REST,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
-  Routes
+  Routes,
 } from "discord.js"
 import { glob } from "glob"
 import env from "../env.js"
@@ -22,11 +22,11 @@ const commandHandler = async (client: Client) => {
   const rest = new REST().setToken(env.TOKEN)
   const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = []
 
-  const files = (await glob(commandsPath)).map(filePath =>
-    path.resolve(filePath)
+  const files = (await glob(commandsPath)).map((filePath) =>
+    path.resolve(filePath),
   )
 
-  const commandPromise = files.map(async file => {
+  const commandPromise = files.map(async (file) => {
     const commandPath = pathToFileURL(file).href
     const { default: command }: { default: Command } = await import(commandPath)
 
@@ -44,7 +44,7 @@ const commandHandler = async (client: Client) => {
 
     // Update Global Slash Commands
     await rest.put(Routes.applicationCommands(env.CLIENT_ID), {
-      body: commands
+      body: commands,
     })
 
     consola.success("✅ Successfully loaded commands!")

@@ -3,7 +3,7 @@ import {
   ChannelType,
   EmbedBuilder,
   PermissionFlagsBits,
-  SlashCommandBuilder
+  SlashCommandBuilder,
 } from "discord.js"
 import { colors } from "../config.js"
 import type { Command } from "../types.js"
@@ -14,12 +14,12 @@ const purgeCommand = {
     .setDescription("Deletes channel messages")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setDMPermission(false)
-    .addIntegerOption(option =>
+    .addIntegerOption((option) =>
       option
         .setName("amount")
         .setDescription("Amount of messages to delete")
         .setMinValue(5)
-        .setMaxValue(100)
+        .setMaxValue(100),
     ),
   async execute(interaction) {
     const { channel } = interaction
@@ -31,7 +31,7 @@ const purgeCommand = {
 
       return interaction.reply({
         embeds: [errorEmbed],
-        ephemeral: true
+        ephemeral: true,
       })
     }
 
@@ -54,7 +54,7 @@ const purgeCommand = {
     } catch (error) {
       consola.error(`❌ ${error}`)
     }
-  }
+  },
 } satisfies Command
 
 export default purgeCommand

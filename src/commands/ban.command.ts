@@ -1,7 +1,7 @@
 import {
   EmbedBuilder,
   PermissionFlagsBits,
-  SlashCommandBuilder
+  SlashCommandBuilder,
 } from "discord.js"
 import { colors } from "../config.js"
 import validateCommand from "../lib/validateCommand.js"
@@ -13,14 +13,14 @@ const banCommand = {
     .setDescription("Bans a user")
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .setDMPermission(false)
-    .addUserOption(option =>
+    .addUserOption((option) =>
       option
         .setName("target")
         .setDescription("User to be banned")
-        .setRequired(true)
+        .setRequired(true),
     )
-    .addStringOption(option =>
-      option.setName("reason").setDescription("Reason for the ban")
+    .addStringOption((option) =>
+      option.setName("reason").setDescription("Reason for the ban"),
     ),
   async execute(interaction) {
     const user = interaction.options.getUser("target")
@@ -32,7 +32,7 @@ const banCommand = {
     const { error, targetUser } = await validateCommand({
       action: "ban",
       user,
-      interaction
+      interaction,
     })
 
     if (error || !targetUser) {
@@ -47,12 +47,12 @@ const banCommand = {
 
     targetUser.ban({
       reason,
-      deleteMessageSeconds: SECONDS_IN_ONE_WEEK
+      deleteMessageSeconds: SECONDS_IN_ONE_WEEK,
     })
 
     const fields = [
       { name: "User", value: `<@!${targetUser.id}>`, inline: true },
-      { name: "Reason", value: reason, inline: true }
+      { name: "Reason", value: reason, inline: true },
     ]
 
     const embed = new EmbedBuilder()
@@ -62,7 +62,7 @@ const banCommand = {
       .setFields(fields)
 
     interaction.reply({ embeds: [embed] })
-  }
+  },
 } satisfies Command
 
 export default banCommand

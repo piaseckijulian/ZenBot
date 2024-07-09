@@ -17,7 +17,7 @@ const serverInfoCommand = {
 
       return interaction.reply({
         embeds: [errorEmbed],
-        ephemeral: true
+        ephemeral: true,
       })
     }
 
@@ -31,14 +31,14 @@ const serverInfoCommand = {
       { name: "Boost tier", value: boostTier },
       {
         name: "Boost count",
-        value: `${guild.premiumSubscriptionCount || "0"} boosts`
+        value: `${guild.premiumSubscriptionCount || "0"} boosts`,
       },
       {
         name: "Created on",
         value: `${dayjs(guild.createdTimestamp).format("D MMMM YYYY")} (${dayjs(
-          guild.createdTimestamp
-        ).fromNow()})`
-      }
+          guild.createdTimestamp,
+        ).fromNow()})`,
+      },
     ]
 
     const embed = new EmbedBuilder()
@@ -49,7 +49,7 @@ const serverInfoCommand = {
       .addFields(fields)
 
     interaction.reply({ embeds: [embed] })
-  }
+  },
 } satisfies Command
 
 export default serverInfoCommand

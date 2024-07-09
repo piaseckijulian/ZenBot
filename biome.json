@@ -3,11 +3,11 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "lineEnding": "lf",
     "ignore": ["dist"]
   },
   "organizeImports": {
-    "enabled": true
+    "enabled": true,
+    "ignore": ["dist"]
   },
   "linter": {
     "enabled": true,
@@ -16,9 +16,7 @@
   },
   "javascript": {
     "formatter": {
-      "semicolons": "asNeeded",
-      "trailingCommas": "none",
-      "arrowParentheses": "asNeeded"
+      "semicolons": "asNeeded"
     }
   }
 }
