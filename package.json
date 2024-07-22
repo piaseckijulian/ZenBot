@@ -19,7 +19,7 @@
   "author": "Julian Piasecki",
   "license": "MIT",
   "dependencies": {
-    "@t3-oss/env-core": "^0.10.1",
+    "@t3-oss/env-core": "^0.11.0",
     "dayjs": "^1.11.11",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
