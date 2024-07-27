@@ -3,13 +3,11 @@ import { pathToFileURL } from "node:url"
 import consola from "consola"
 import type { Client, ClientEvents } from "discord.js"
 import { glob } from "glob"
-import { fileDirName } from "../lib/utils.js"
+import { isProd } from "../lib/utils.js"
 import type { Event } from "../types.js"
 
-const { __dirname } = fileDirName(import.meta.url)
-
 const eventHandler = async (client: Client) => {
-  const eventsPath = __dirname.includes("dist")
+  const eventsPath = isProd()
     ? "./dist/events/*.event.js"
     : "./src/events/*.event.ts"
 

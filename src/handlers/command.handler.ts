@@ -9,13 +9,11 @@ import {
 } from "discord.js"
 import { glob } from "glob"
 import env from "../env.js"
-import { fileDirName } from "../lib/utils.js"
+import { isProd } from "../lib/utils.js"
 import type { Command } from "../types.js"
 
-const { __dirname } = fileDirName(import.meta.url)
-
 const commandHandler = async (client: Client) => {
-  const commandsPath = __dirname.includes("dist")
+  const commandsPath = isProd()
     ? "./dist/commands/*.command.js"
     : "./src/commands/*.command.ts"
 

@@ -3,15 +3,13 @@ import { pathToFileURL } from "node:url"
 import { Client, Collection, GatewayIntentBits } from "discord.js"
 import { glob } from "glob"
 import env from "./env.js"
-import { fileDirName } from "./lib/utils.js"
+import { isProd } from "./lib/utils.js"
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.commands = new Collection()
 client.cooldowns = new Collection()
 
-const { __dirname } = fileDirName(import.meta.url)
-
-const handlersPath = __dirname.includes("dist")
+const handlersPath = isProd()
   ? "./dist/handlers/*.handler.js"
   : "./src/handlers/*.handler.ts"
 

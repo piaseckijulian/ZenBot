@@ -1,9 +1,3 @@
-import { dirname } from "node:path"
-import { fileURLToPath } from "node:url"
+import env from "../env.js"
 
-export const fileDirName = (url: string) => {
-  const __filename = fileURLToPath(url)
-  const __dirname = dirname(__filename)
-
-  return { __dirname, __filename }
-}
+export const isProd = () => !!env.PROD

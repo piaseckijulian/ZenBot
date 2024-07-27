@@ -7,7 +7,8 @@ const env = createEnv({
     TOKEN: z.string().min(1),
     CLIENT_ID: z.string().min(1),
     AVATAR_URL: z.string().url().min(1),
-    // GUILD_ID: z.string().min(1) // Development only
+    PROD: z.string().optional(), // Production only
+    GUILD_ID: z.string().optional(), // Development only
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
