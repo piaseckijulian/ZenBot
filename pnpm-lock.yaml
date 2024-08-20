@@ -13,7 +13,7 @@ importers:
         version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
       dayjs:
         specifier: ^1.11.11
-        version: 1.11.12
+        version: 1.11.13
       discord.js:
         specifier: ^14.15.3
         version: 14.15.3
@@ -527,8 +527,8 @@ packages:
     resolution: {integrity: sha512-wAV9QHOsNbwnWdNW2FYvE1P56wtgSbM+3SZcdGiWQILwVjACCXDCI3Ai8QlCjMDB8YK5zySiXZYBiwGmNY3lnw==}
     engines: {node: '>=12'}
 
-  dayjs@1.11.12:
-    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   discord-api-types@0.37.83:
     resolution: {integrity: sha512-urGGYeWtWNYMKnYlZnOnDHm8fVRffQs3U0SpE8RHeiuLKb/u92APS8HoQnPTFbnXmY1vVnXjXO4dOxcAn3J+DA==}
@@ -1392,7 +1392,7 @@ snapshots:
 
   dargs@8.1.0: {}
 
-  dayjs@1.11.12: {}
+  dayjs@1.11.13: {}
 
   discord-api-types@0.37.83: {}
 
