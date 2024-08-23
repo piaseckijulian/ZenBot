@@ -23,21 +23,51 @@ ZenBot is a helpful and friendly Discord Bot that makes managing your server eas
 - Zod
 - Consola
 
-## ✨ Usage
+## ✨ Quick Start
+
+Here’s how to set up the project on your local machine.
+
+**Prerequisites**
+
+Ensure that the following are installed on your machine:
+
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org/en)
+- [pnpm](https://pnpm.io)
+
+**Cloning the Repository**
 
 ```bash
 git clone https://github.com/piaseckijulian/ZenBot.git
 cd ZenBot
 ```
 
-Next, duplicate the `.env.example` file, rename the duplicate to `.env`, and then input your environmental variables there.
+**Installation**
 
 ```bash
 pnpm i
+```
+
+**Set Up Environment Variables**
+
+Duplicate the `.env.example` file and rename it to `.env`. Insert your environmental variables there.
+
+You can get the `TOKEN` and `CLIENT_ID` from [Discord Developer Portal](https://discord.com/developers).
+
+`AVATAR_URL` is a URL of author's profile picture. It is shown in `/author` command.
+
+Specify the `PROD` variable **ONLY** during production.
+
+For testing purposes, you may want to specify the GUILD_ID variable if you want instant access to the commands you create.
+
+**Running the Project**
+
+```bash
 pnpm dev
 ```
 
-That's it! - You're good to go. You can add new features, fix bugs etc.
+That's it! - You're good to go. You can now use the project however you want.
+
 
 ## 🌐 License
 
