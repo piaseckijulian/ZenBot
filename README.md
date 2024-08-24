@@ -58,7 +58,7 @@ You can get the `TOKEN` and `CLIENT_ID` from [Discord Developer Portal](https://
 
 Specify the `PROD` variable **ONLY** during production.
 
-For testing, specify the `GUILD_ID` variable to get instant access to the commands you create.
+For testing in a server, specify the `GUILD_ID` variable to get instant access to the commands you create.
 
 **Running the Project**
 
