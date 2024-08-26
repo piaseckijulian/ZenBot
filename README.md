@@ -50,9 +50,9 @@ pnpm i
 
 **Set Up Environment Variables**
 
-Duplicate the `.env.example` file and rename it to `.env`. Insert your environmental variables there.
+Duplicate the `.env.example` file and rename it to `.env`
 
-You can get the `TOKEN` and `CLIENT_ID` from [Discord Developer Portal](https://discord.com/developers).
+You can get the `TOKEN` and `CLIENT_ID` from [Discord Developer Portal](https://discord.com/developers)
 
 `AVATAR_URL` is a URL of author's profile picture. It is shown in `/author` command.
 
@@ -66,7 +66,7 @@ For testing in a server, specify the `GUILD_ID` variable to get instant access t
 pnpm dev
 ```
 
-That's it! - You're good to go. You can now use the project however you want.
+That's it! You're all set to start using the project as needed.
 
 
 ## 🌐 License
