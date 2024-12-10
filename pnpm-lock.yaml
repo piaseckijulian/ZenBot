@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@t3-oss/env-core':
         specifier: ^0.11.0
-        version: 0.11.1(typescript@5.7.2)(zod@3.23.8)
+        version: 0.11.1(typescript@5.7.2)(zod@3.24.0)
       dayjs:
         specifier: ^1.11.11
         version: 1.11.13
@@ -31,7 +31,7 @@ importers:
         version: 9.2.0
       zod:
         specifier: ^3.23.8
-        version: 3.23.8
+        version: 3.24.0
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.8.3
@@ -895,8 +895,8 @@ packages:
     resolution: {integrity: sha512-b4JR1PFR10y1mKjhHY9LaGo6tmrgjit7hxVIeAmyMw3jegXR4dhYqLaQF5zMXZxY7tLpMyJeLjr1C4rLmkVe8g==}
     engines: {node: '>=12.20'}
 
-  zod@3.23.8:
-    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+  zod@3.24.0:
+    resolution: {integrity: sha512-Hz+wiY8yD0VLA2k/+nsg2Abez674dDGTai33SwNvMPuf9uIrBC9eFgIMQxBBbHFxVXi8W+5nX9DcAh9YNSQm/w==}
 
 snapshots:
 
@@ -1193,9 +1193,9 @@ snapshots:
 
   '@sapphire/snowflake@3.5.3': {}
 
-  '@t3-oss/env-core@0.11.1(typescript@5.7.2)(zod@3.23.8)':
+  '@t3-oss/env-core@0.11.1(typescript@5.7.2)(zod@3.24.0)':
     dependencies:
-      zod: 3.23.8
+      zod: 3.24.0
     optionalDependencies:
       typescript: 5.7.2
 
@@ -1649,4 +1649,4 @@ snapshots:
 
   yocto-queue@1.1.1: {}
 
-  zod@3.23.8: {}
+  zod@3.24.0: {}
